@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "BloodyAngel22",
+  "classifications": ["Repository", "CRUD Repository"],
+  "identity": "CleanArch.Repository.Template",
+  "name": "Repository",
+  "shortName": "repository",
+  "sourceName": "ProductRepository",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "symbols": {
+    "entityClassName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "Product",
+      "description": "Entity class name",
+      "replaces": "Product"
+    },
+    "entityObjectName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "entity",
+      "description": "Object name",
+      "replaces": "entity"
+    },
+    "idType": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "Guid",
+      "description": "Id type",
+      "replaces": "Guid"
+    },
+    "projectName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "Template",
+      "description": "Project name",
+      "replaces": "Template"
+    }
+  }
+}

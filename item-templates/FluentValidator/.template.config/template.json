@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "BloodyAngel22",
+  "classifications": ["Validators", "FluentValidation"],
+  "identity": "CleanArch.FluentValidator.Template",
+  "name": "Fluent Validator",
+  "shortName": "fluentvalidator",
+  "sourceName": "ProductValidator",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "symbols": {
+    "dtoName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "ProductDto",
+      "description": "DTO name for validation",
+      "replaces": "ProductDto"
+    },
+    "projectName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "Template",
+      "description": "Project name",
+      "replaces": "Template"
+    }
+  }
+}

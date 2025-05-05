@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "BloodyAngel22",
+  "classifications": ["Controller", "CRUD Controller"],
+  "identity": "CleanArch.Controller.Template",
+  "name": "Controller",
+  "shortName": "controller",
+  "sourceName": "ProductController",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "symbols": {
+    "entityClassName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "Product",
+      "description": "Entity class name",
+      "replaces": "Product"
+    },
+    "entityObjectName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "entity",
+      "description": "Object name",
+      "replaces": "entity"
+    },
+    "serviceObjectName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "product",
+      "description": "Service object name",
+      "replaces": "product"
+    },
+    "idType": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "Guid",
+      "description": "ID type",
+      "replaces": "Guid"
+    },
+    "projectName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "Template",
+      "description": "Project name",
+      "replaces": "Template"
+    }
+  }
+}
