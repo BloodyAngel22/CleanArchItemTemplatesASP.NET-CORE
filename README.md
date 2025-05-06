@@ -21,9 +21,7 @@ Each template is tailored for a specific layer of your application — from cont
 | **Fluent Validator** | `fluentvalidator` | C#       | Sets up a FluentValidation validator.        |
 | **IRepository**      | `irepository`     | C#       | Interface for a CRUD repository.             |
 | **Repository**       | `repository`      | C#       | A concrete repository with basic CRUD.       |
-| **Response Helper**  | `responseHelper`  | C#       | Helper for standardized API responses.       |
 | **Service**          | `service`         | C#       | A basic service layer with CRUD logic.       |
-| **Service Result Helper**   | `serviceResult`   | C#       | Helper for service execution results. |
 
 ---
 
