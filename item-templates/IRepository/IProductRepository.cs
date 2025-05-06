@@ -1,3 +1,5 @@
+using Template.Core.Entities;
+
 namespace Template.Core.Repositories;
 
 public interface IProductRepository

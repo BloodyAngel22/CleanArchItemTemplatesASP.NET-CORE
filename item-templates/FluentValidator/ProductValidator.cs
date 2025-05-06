@@ -1,10 +1,11 @@
+using Template.Application.DTOs.Request;
 using FluentValidation;
 
 namespace Template.Application.Validators;
 
-public class ProductValidator : AbstractValidator<ProductDto>
+public class ProductDTORequestValidator : AbstractValidator<ProductDtoRequest>
 {
-    public ProductValidator()
+    public ProductDTORequestValidator()
     {
         RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required.");
     }

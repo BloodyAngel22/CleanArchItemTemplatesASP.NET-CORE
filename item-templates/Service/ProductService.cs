@@ -1,6 +1,7 @@
+using Template.Application.DTOs.Request;
 using Template.Application.Helpers;
+using Template.Core.Entities;
 using Template.Core.IRepositories;
-using Template.Core.Models;
 
 namespace Template.Application.Services;
 

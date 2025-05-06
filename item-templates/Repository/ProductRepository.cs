@@ -1,5 +1,5 @@
 using Template.Core.IRepositories;
-using Template.Core.Models;
+using Template.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Template.Infrastructure.Repositories;
