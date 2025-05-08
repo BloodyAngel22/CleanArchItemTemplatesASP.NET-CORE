@@ -38,6 +38,13 @@
       "defaultValue": "Template",
       "description": "Project name",
       "replaces": "Template"
+    },
+    "dbContext": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "AppDbContext",
+      "description": "DbContext name",
+      "replaces": "AppDbContext"
     }
   }
 }

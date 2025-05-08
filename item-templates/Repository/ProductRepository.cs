@@ -1,5 +1,6 @@
 using Template.Core.IRepositories;
 using Template.Core.Entities;
+using Template.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace Template.Infrastructure.Repositories;

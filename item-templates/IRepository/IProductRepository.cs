@@ -1,6 +1,6 @@
 using Template.Core.Entities;
 
-namespace Template.Core.Repositories;
+namespace Template.Core.IRepositories;
 
 public interface IProductRepository
 {

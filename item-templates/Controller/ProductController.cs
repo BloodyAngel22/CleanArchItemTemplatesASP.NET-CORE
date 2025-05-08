@@ -32,7 +32,7 @@ public class ProductController(ProductService productService) : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddProduct(ProductDTO entityDTO)
+    public async Task<IActionResult> AddProduct(ProductDTORequest entityDTO)
     {
         var result = await _productService.AddProduct(entityDTO);
 
@@ -42,7 +42,7 @@ public class ProductController(ProductService productService) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateProduct(Guid id, ProductDTO entityDTO)
+    public async Task<IActionResult> UpdateProduct(Guid id, ProductDTORequest entityDTO)
     {
         var result = await _productService.UpdateProduct(id, entityDTO);
 
