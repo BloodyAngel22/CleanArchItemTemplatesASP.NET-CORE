@@ -1,7 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
 using Template.Application.DTOs.Request;
 using Template.Application.Services;
 using Template.WebApi.Helpers;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Template.WebApi.Controllers;
 
@@ -12,9 +12,16 @@ public class ProductController(ProductService productService) : ControllerBase
     private readonly ProductService _productService = productService;
 
     [HttpGet]
-    public async Task<IActionResult> GetProducts(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetProducts(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10,
+        CancellationToken cancellationToken = default
+    )
     {
-        var result = await _productService.GetProducts(cancellationToken);
+        var result = await _productService.GetProducts(
+            new PaginationDTORequest(page, pageSize),
+            cancellationToken
+        );
 
         return result.Success
             ? ResponseHelper.Ok(result.Data)
@@ -22,7 +29,10 @@ public class ProductController(ProductService productService) : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetProduct(Guid id, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetProduct(
+        Guid id,
+        CancellationToken cancellationToken = default
+    )
     {
         var result = await _productService.GetProduct(id, cancellationToken);
 
@@ -32,7 +42,10 @@ public class ProductController(ProductService productService) : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddProduct(ProductDTORequest entityDTO, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> AddProduct(
+        ProductDTORequest entityDTO,
+        CancellationToken cancellationToken = default
+    )
     {
         var result = await _productService.AddProduct(entityDTO, cancellationToken);
 
@@ -42,7 +55,11 @@ public class ProductController(ProductService productService) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateProduct(Guid id, ProductDTORequest entityDTO, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> UpdateProduct(
+        Guid id,
+        ProductDTORequest entityDTO,
+        CancellationToken cancellationToken = default
+    )
     {
         var result = await _productService.UpdateProduct(id, entityDTO, cancellationToken);
 
@@ -52,7 +69,10 @@ public class ProductController(ProductService productService) : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteProduct(Guid id, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> DeleteProduct(
+        Guid id,
+        CancellationToken cancellationToken = default
+    )
     {
         var result = await _productService.DeleteProduct(id, cancellationToken);
 

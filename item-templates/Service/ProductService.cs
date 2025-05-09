@@ -1,10 +1,10 @@
+using FluentValidation;
+using Microsoft.Extensions.Logging;
 using Template.Application.DTOs.Request;
 using Template.Application.Helpers;
 using Template.Core.Entities;
 using Template.Core.Exceptions;
 using Template.Core.IRepositories;
-using Microsoft.Extensions.Logging;
-using FluentValidation;
 
 namespace Template.Application.Services;
 
@@ -12,7 +12,7 @@ public class ProductService(
     IProductRepository productRepository,
     IValidator<ProductDTORequest> productValidator,
     ILogger<ProductService> logger
-    )
+)
 {
     private readonly IProductRepository _productRepository = productRepository;
 
@@ -20,12 +20,33 @@ public class ProductService(
 
     private readonly ILogger<ProductService> _logger = logger;
 
-    public async Task<ServiceResult<IEnumerable<Product>>> GetProducts(CancellationToken cancellationToken = default)
+    public async Task<ServiceResult<IEnumerable<Product>>> GetProducts(
+        PaginationDTORequest pagination,
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {
-            var products = await _productRepository.GetProductsAsync(cancellationToken);
+            var validationResult = await _productValidator.ValidateAsync(
+                pagination,
+                cancellationToken
+            );
+
+            if (!validationResult.IsValid)
+                throw new ValidateException(
+                    ValidatorError.GetErrorMessages(ValidatorError.GetErrors(validationResult))
+                );
+
+            var products = await _productRepository.GetProductsWithPaginationAsync(
+                pagination,
+                cancellationToken
+            );
             return ServiceResult<IEnumerable<Product>>.Ok(products);
+        }
+        catch (ValidateException ex)
+        {
+            _logger.LogError($"Validation Error/s: {ex.Message}");
+            return ServiceResult<IEnumerable<Product>>.Fail(ex.Message);
         }
         catch (Exception ex)
         {
@@ -34,7 +55,10 @@ public class ProductService(
         }
     }
 
-    public async Task<ServiceResult<Product>> GetProduct(Guid id, CancellationToken cancellationToken = default)
+    public async Task<ServiceResult<Product>> GetProduct(
+        Guid id,
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {
@@ -48,19 +72,21 @@ public class ProductService(
         }
     }
 
-    public async Task<ServiceResult<string>> AddProduct(ProductDTORequest entity, CancellationToken cancellationToken = default)
+    public async Task<ServiceResult<string>> AddProduct(
+        ProductDTORequest entity,
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {
             var validationResult = await _productValidator.ValidateAsync(entity, cancellationToken);
 
             if (!validationResult.IsValid)
-                throw new ValidateException(ValidatorError.GetErrorMessages(ValidatorError.GetErrors(validationResult)));
+                throw new ValidateException(
+                    ValidatorError.GetErrorMessages(ValidatorError.GetErrors(validationResult))
+                );
 
-                var entityToAdd = new Product
-                {
-                    Name = entity.Name
-                };
+            var entityToAdd = new Product { Name = entity.Name };
 
             await _productRepository.AddProductAsync(entityToAdd, cancellationToken);
             return ServiceResult<string>.Ok("Product created successfully");
@@ -77,20 +103,22 @@ public class ProductService(
         }
     }
 
-    public async Task<ServiceResult<string>> UpdateProduct(Guid id, ProductDTORequest entity, CancellationToken cancellationToken = default)
+    public async Task<ServiceResult<string>> UpdateProduct(
+        Guid id,
+        ProductDTORequest entity,
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {
             var validationResult = await _productValidator.ValidateAsync(entity, cancellationToken);
 
             if (!validationResult.IsValid)
-                throw new ValidateException(ValidatorError.GetErrorMessages(ValidatorError.GetErrors(validationResult)));
+                throw new ValidateException(
+                    ValidatorError.GetErrorMessages(ValidatorError.GetErrors(validationResult))
+                );
 
-            var entityToUpdate = new Product
-            {
-                Id = id,
-                Name = entity.Name
-            };
+            var entityToUpdate = new Product { Id = id, Name = entity.Name };
 
             await _productRepository.UpdateProductAsync(entityToUpdate, cancellationToken);
             return ServiceResult<string>.Ok("Product updated successfully");
@@ -107,7 +135,10 @@ public class ProductService(
         }
     }
 
-    public async Task<ServiceResult<string>> DeleteProduct(Guid id, CancellationToken cancellationToken = default)
+    public async Task<ServiceResult<string>> DeleteProduct(
+        Guid id,
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {

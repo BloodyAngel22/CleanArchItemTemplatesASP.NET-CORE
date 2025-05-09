@@ -1,5 +1,5 @@
-using Template.Application.DTOs.Request;
 using FluentValidation;
+using Template.Application.DTOs.Request;
 
 namespace Template.Application.Validators;
 
