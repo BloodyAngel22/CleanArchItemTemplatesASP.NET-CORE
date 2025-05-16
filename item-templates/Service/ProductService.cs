@@ -38,7 +38,8 @@ public class ProductService(
                 );
 
             var products = await _productRepository.GetProductsWithPaginationAsync(
-                pagination,
+                pagination.Page,
+                pagination.PageSize,
                 cancellationToken
             );
             return ServiceResult<IEnumerable<Product>>.Ok(products);
